@@ -15,6 +15,8 @@ module SpreeSimpleSales
       Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*_decorator*.rb')) do |c|
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
+      Spree::PermittedAttributes.product_attributes << :sale_price
+      Spree::PermittedAttributes.variant_attributes << :sale_price
     end
 
     config.to_prepare &method(:activate).to_proc
